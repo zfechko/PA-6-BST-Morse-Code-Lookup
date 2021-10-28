@@ -94,18 +94,23 @@ void BST::printTree(BSTNode* pTree) const
 	}
 }
 
-string BST::search(BSTNode* pTree, char searchChar, string& result) const //private function
+void BST::search(BSTNode* pTree, char searchChar, string& result) const //private function
 {
 	if (pTree != nullptr)
 	{
-		//use in order traversal to find the target character
-		search(pTree->getLeft(), searchChar, result);
 		if (pTree->getData().getEnglish() == searchChar)
 		{
 			result = pTree->getData().getMorse();
-			return result;
+			return;
 		}
-		search(pTree->getRight(), searchChar, result);
+		if (searchChar < pTree->getData().getEnglish())
+		{
+			search(pTree->getLeft(), searchChar, result);
+		}
+		if (searchChar > pTree->getData().getEnglish());
+		{
+			search(pTree->getRight(), searchChar, result);
+		}
 	}
 }
 
@@ -122,5 +127,31 @@ void BST::testSearch()
 	string testMorseString;
 	cout << "Enter a character to search for" << endl;
 	cin >> testChar;
-	cout << "The morse equivalent for " << testChar << "is " << this->search(testChar) << endl;
+	cout << "The morse equivalent for " << testChar << " is " << this->search(testChar) << endl;
+}
+
+void BST::convert()
+{
+	morseFile.open("convert.txt", ios::in);
+	string temp = "";
+	while(!morseFile.eof())
+	{
+		getline(morseFile, temp);
+		cout << "Translating '" << temp << "' to morse code" << endl;
+		string::iterator translator = temp.begin(); //using a string iterator which I learned about in lab 9
+		while (translator != temp.end())
+		{
+			if (*translator == ' ') //if the current character in the string is a space
+			{
+				cout << "   "; //we put the space for the echo to the screen
+			}
+			else
+			{
+				cout << search(*translator) << " ";
+			}
+			translator++;
+		}
+		cout << "\n"; //add endline for if we're translating more than one line in the file
+	}
+	morseFile.close();
 }

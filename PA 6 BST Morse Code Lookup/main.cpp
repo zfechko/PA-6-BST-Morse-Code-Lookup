@@ -12,7 +12,7 @@ int main()
 	BST morseTree;
 	morseTree.printTree();
 
-	morseTree.testSearch();
+	morseTree.convert();
 
 
 	return 0;

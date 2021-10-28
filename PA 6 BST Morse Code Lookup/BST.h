@@ -10,7 +10,7 @@ private:
 	void chopTree(BSTNode* pNode);
 	void insert(BSTNode* pTree, Data newData);
 	void printTree(BSTNode* pTree) const;
-	string search(BSTNode* pTree, char searchChar, string& result) const;
+	void search(BSTNode* pTree, char searchChar, string& result) const;
 public:
 	/*Constructors/Destructors*/
 	BST();
@@ -21,5 +21,7 @@ public:
 	void printTree() const;
 	string search(char searchChar) const;
 	void testSearch();
+	void convert();
+	
 };
 
