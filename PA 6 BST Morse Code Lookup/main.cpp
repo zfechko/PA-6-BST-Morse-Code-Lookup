@@ -9,8 +9,10 @@ Due 10/29/2021
 
 int main()
 {
+	BST morseTree;
+	morseTree.printTree();
 
-
+	morseTree.testSearch();
 
 
 	return 0;

@@ -3,9 +3,9 @@
 /*Constructors*/
 BSTNode::BSTNode(Data newData)
 {
+	mData = newData;
 	pLeft = nullptr;
 	pRight = nullptr;
-	mData = newData;
 }
 
 /*Getters*/

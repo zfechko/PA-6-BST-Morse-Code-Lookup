@@ -15,6 +15,7 @@ BST::BST()
 		insertionData = new Data(tempChar, tempString); //create a new data object with the character and string
 		insert(this->pRoot, *insertionData); //and then insert it into the tree
 	}
+	morseFile.close();
 }
 
 BST::~BST()
@@ -65,7 +66,7 @@ void BST::insert(BSTNode* pTree, Data newData)
 			if (pTree->getRight() == nullptr)
 			{
 				//insert here
-				pTree->setLeft(new BSTNode(newData));
+				pTree->setRight(new BSTNode(newData));
 			}
 			else
 			{
@@ -91,4 +92,35 @@ void BST::printTree(BSTNode* pTree) const
 		cout << "[" << pTree->getData().getEnglish() << "] = [" << pTree->getData().getMorse() << "]" << endl;
 		printTree(pTree->getRight());
 	}
+}
+
+string BST::search(BSTNode* pTree, char searchChar, string& result) const //private function
+{
+	if (pTree != nullptr)
+	{
+		//use in order traversal to find the target character
+		search(pTree->getLeft(), searchChar, result);
+		if (pTree->getData().getEnglish() == searchChar)
+		{
+			result = pTree->getData().getMorse();
+			return result;
+		}
+		search(pTree->getRight(), searchChar, result);
+	}
+}
+
+string BST::search(char searchChar) const
+{
+	string result = "";
+	search(this->pRoot, toupper(searchChar), result);
+	return result;
+}
+
+void BST::testSearch()
+{
+	char testChar;
+	string testMorseString;
+	cout << "Enter a character to search for" << endl;
+	cin >> testChar;
+	cout << "The morse equivalent for " << testChar << "is " << this->search(testChar) << endl;
 }
