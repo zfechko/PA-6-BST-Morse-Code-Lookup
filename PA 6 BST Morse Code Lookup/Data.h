@@ -1,16 +1,36 @@
 #pragma once
 #include "libraries.h"
-//will eventually be turning this into a class template
+
+template<class from, class to>
 class Data
 {
 private:
-	char english;
-	string morse;
+	from english;
+	to morse;
 
 public:
-	Data(char newEng, string newMorse);
+	Data(from newEng, to newMorse);
 	Data();
-	char getEnglish();
-	string getMorse();
+	from getEnglish();
+	to getMorse();
 };
 
+
+template<class from, class to>
+Data<from, to>::Data(from newEng, to newMorse)
+{
+	this->english = newEng;
+	this->morse = newMorse;
+}
+
+template<class from, class to>
+from Data<from, to>::getEnglish()
+{
+	return english;
+}
+
+template<class from, class to>
+to Data<from, to>::getMorse()
+{
+	return morse;
+}

@@ -10,7 +10,7 @@ Creates a binary search tree to translate english to morse code
 
 int main()
 {
-	BST morseTree;
+	BST<char, string> morseTree;
 	morseTree.printTree();
 	morseTree.convert();
 
